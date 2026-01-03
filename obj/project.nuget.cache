@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "dgSpecHash": "lhvLl6o6TUs=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cubelocaladmin\\Documents\\SentinelAI\\SentinelAI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\restsharp\\110.2.0\\restsharp.110.2.0.nupkg.sha512",
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\system.commandline\\2.0.0-beta4.22272.1\\system.commandline.2.0.0-beta4.22272.1.nupkg.sha512",
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512",
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.22\\microsoft.netcore.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.22\\microsoft.windowsdesktop.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.22\\microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\cubelocaladmin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.22\\microsoft.netcore.app.host.win-x64.8.0.22.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "message": "SentinelAI depends on System.CommandLine (>= 2.0.0-beta4) but System.CommandLine 2.0.0-beta4 was not found. System.CommandLine 2.0.0-beta4.22272.1 was resolved instead.",
+      "projectPath": "C:\\Users\\cubelocaladmin\\Documents\\SentinelAI\\SentinelAI.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\cubelocaladmin\\Documents\\SentinelAI\\SentinelAI.csproj",
+      "libraryId": "System.CommandLine",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "message": "Package 'RestSharp' 110.2.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-4rr6-2v9v-wcpc",
+      "projectPath": "C:\\Users\\cubelocaladmin\\Documents\\SentinelAI\\SentinelAI.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\cubelocaladmin\\Documents\\SentinelAI\\SentinelAI.csproj",
+      "libraryId": "RestSharp",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
+}
