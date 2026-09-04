@@ -2,7 +2,7 @@
 {
     public class LogEvent
     {
-        public string Raw { get; set; }
+        public string Raw { get; set; } = string.Empty;
         public override string ToString() => Raw;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using SentinelAI.Services;
 using SentinelAI.Helpers;
@@ -15,7 +14,7 @@ namespace SentinelAI
         {
             Console.Title = "SentinelAI  Cybersecurity Assistant";
 
-            Console.WriteLine("==== SentinelAI ====\");
+            Console.WriteLine("==== SentinelAI ====");
             Console.WriteLine("1. Analyze Log File");
             Console.WriteLine("2. Analyze Script");
             Console.WriteLine("3. YARA Scan File");
@@ -70,7 +69,7 @@ namespace SentinelAI
             var path = Console.ReadLine();
 
             var analyzer = new LogAnalyzer();
-            var events = analyzer.ParseLogFile(path);
+            var events = analyzer.ParseLogFile(path ?? string.Empty);
 
             Console.WriteLine($"Parsed {events.Count} log events.");
 
@@ -78,7 +77,7 @@ namespace SentinelAI
             var summary = await llm.AskAsync($"Summarize these logs and identify any threats:\n{string.Join("\n", events)}");
 
             Console.WriteLine(summary);
-            File.WriteAllText("log_report.txt", summary);
+            FileHelper.WriteReport(ConfigurationLoader.Load().ReportsDirectory, "log_report.txt", summary);
         }
 
         static async Task AnalyzeScript()
@@ -86,15 +85,17 @@ namespace SentinelAI
             Console.Write("Enter script path: ");
             var path = Console.ReadLine();
 
-            var script = File.ReadAllText(path);
+            var script = FileHelper.Read(path ?? string.Empty);
             var analyzer = new ScriptAnalyzer();
             var indicators = analyzer.Scan(script);
+            Console.WriteLine("Deterministic findings:");
+            indicators.ForEach(indicator => Console.WriteLine($" - {indicator}"));
 
             var llm = new LlmClient();
-            var result = await llm.AskAsync($"Analyze this script for malicious behavior:\n{script}");
+            var result = await llm.AskAsync($"Analyze this script for malicious behavior. Deterministic findings:\n{string.Join("\n", indicators)}\n\nScript:\n{script}");
 
             Console.WriteLine(result);
-            File.WriteAllText("script_report.txt", result);
+            FileHelper.WriteReport(ConfigurationLoader.Load().ReportsDirectory, "script_report.txt", result);
         }
 
         static async Task RunYaraScan()
@@ -114,7 +115,7 @@ namespace SentinelAI
             Console.Write("Enter memory strings file: ");
             var path = Console.ReadLine();
 
-            var strings = File.ReadAllLines(path);
+            var strings = FileHelper.ReadLines(path ?? string.Empty);
             var memory = new MemoryDumpAnalyzer();
 
             var output = await memory.Summarize(strings);
@@ -126,7 +127,7 @@ namespace SentinelAI
             Console.Write("Indicators file: ");
             var path = Console.ReadLine();
 
-            var indicators = File.ReadAllLines(path);
+            var indicators = FileHelper.ReadLines(path ?? string.Empty);
             var mitre = new MitreMapper();
 
             var output = await mitre.Map(indicators);
@@ -138,10 +139,10 @@ namespace SentinelAI
             Console.Write("Suspicious strings file: ");
             var path = Console.ReadLine();
 
-            var suspicious = File.ReadAllLines(path);
+            var suspicious = FileHelper.ReadLines(path ?? string.Empty);
             var classifier = new MalwareClassifier();
 
-            var output = await classifier.Classify(new List<string>(), suspicious.ToList());
+            var output = await classifier.Classify(new List<string>(), new List<string>(suspicious));
             Console.WriteLine(output);
         }
 
@@ -150,7 +151,7 @@ namespace SentinelAI
             Console.Write("Log or script file: ");
             var path = Console.ReadLine();
 
-            var content = File.ReadAllText(path);
+            var content = FileHelper.Read(path ?? string.Empty);
             var invest = new IncidentInvestigator();
 
             var output = await invest.Investigate(content);

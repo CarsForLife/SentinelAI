@@ -1,0 +1,113 @@
+SentinelAI Change Analysis
+==========================
+
+Date: 2026-09-04
+
+Summary
+-------
+The project was reviewed and hardened so it fails more clearly, handles input more safely, and documents its current prototype limitations.
+
+Changes Made
+------------
+
+1. Program.cs
+   - Fixed the unterminated console banner string that prevented compilation.
+   - Routed script, memory, MITRE, malware, incident, and log file reads through safer helpers.
+   - Displayed deterministic script findings before the LLM analysis.
+   - Included deterministic script findings in the LLM prompt.
+   - Wrote generated reports to the configured Reports directory.
+
+2. Config/settings.json
+   - Added configuration for:
+     - Local LLM endpoint
+     - LLM model name
+     - LLM timeout
+     - Maximum input size
+     - Reports directory
+     - YARA rules path
+
+3. Models/AppSettings.cs
+   - Added the strongly typed application settings model and defaults.
+
+4. Helpers/ConfigurationLoader.cs
+   - Added configuration loading from Config/settings.json.
+   - Added validation for the endpoint, timeout, and input size.
+
+5. Helpers/FileHelper.cs
+   - Added validation for blank and missing paths.
+   - Added a maximum file-size limit.
+   - Added UTF-8 file reading and line reading helpers.
+   - Added a helper that creates the reports directory before writing output.
+
+6. Helpers/YaraRuleLoader.cs
+   - Made the rules path configurable.
+   - Returns an empty result when the rules file does not exist.
+
+7. Services/LlmClient.cs
+   - Removed hard-coded endpoint and model usage.
+   - Reads endpoint, model, and timeout from configuration.
+   - Added request timeout handling.
+   - Validates HTTP status codes.
+   - Detects empty, malformed, or incomplete LLM responses.
+   - Reports clear errors instead of failing during JSON property access.
+
+8. Services/LogAnalyzer.cs
+   - Applied the maximum input-size limit to log files.
+
+9. Services/ScriptAnalyzer.cs
+   - Made indicator matching case-insensitive for:
+     - Network download commands
+     - Base64 payloads
+     - Defender exclusion changes
+
+10. Services/YaraScanner.cs
+    - Removed the guaranteed fake malware result.
+    - Added deterministic text signatures for common suspicious behavior.
+    - Added missing-file and file-size validation.
+    - Clearly documented that this is not a real YARA interpreter.
+
+11. Models/LogEvent.cs and Models/SuspiciousIndicator.cs
+    - Initialized non-nullable string properties to avoid nullable warnings.
+
+12. SentinelAI.csproj
+    - Configured settings.json to copy into the build output directory.
+
+13. README.md
+    - Added installation and run instructions.
+    - Documented the local LLM endpoint format.
+    - Documented input limits, report output, privacy guidance, and the YARA limitation.
+
+Current Features
+----------------
+- Log parsing and LLM-based log summarization
+- Script analysis with deterministic findings and LLM analysis
+- Deterministic suspicious-file scanning
+- Memory-string summarization
+- MITRE ATT&CK mapping
+- Malware classification
+- Incident investigation
+- Configurable local OpenAI-compatible LLM endpoint
+- Bounded file input
+- Report generation under Reports/
+
+Known Limitations
+-----------------
+- The YARA menu does not execute YARA rules. It uses deterministic text signatures only.
+- A local OpenAI-compatible LLM service must be running for AI features.
+- The example input files are currently empty.
+- The repository has no automated test project yet.
+- The project targets .NET 8, but the development environment used for this review only had .NET SDK 6.0.400 installed.
+
+Validation Performed
+--------------------
+- VS Code diagnostics reported no errors in the touched C# files.
+- Config/settings.json passed JSON validation.
+- Git diff whitespace validation passed.
+- Full compilation could not be completed because .NET SDK 8 is not installed in the environment.
+
+Recommended Next Steps
+----------------------
+1. Install the .NET 8 SDK and run dotnet restore, dotnet build, and dotnet run.
+2. Add unit tests for file limits, script detection, YARA fallback behavior, and malformed LLM responses.
+3. Integrate a real YARA engine if genuine .yar rule execution is required.
+4. Add GitHub Actions to build and test the project automatically.

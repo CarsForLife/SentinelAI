@@ -1,0 +1,8 @@
+{
+	"LlmBaseUrl": "http://localhost:3000/v1/chat/completions",
+	"LlmModel": "gpt-4",
+	"LlmTimeoutSeconds": 30,
+	"MaxInputBytes": 10485760,
+	"ReportsDirectory": "Reports",
+	"YaraRulesPath": "Examples/yara_rules.yar"
+}
