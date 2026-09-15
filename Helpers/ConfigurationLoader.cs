@@ -18,8 +18,8 @@ namespace SentinelAI.Helpers
                 settings = JsonSerializer.Deserialize<AppSettings>(json) ?? settings;
             }
 
-            if (string.IsNullOrWhiteSpace(settings.LlmBaseUrl) || settings.LlmTimeoutSeconds < 1 || settings.MaxInputBytes < 1)
-                throw new InvalidOperationException("Config/settings.json contains invalid LLM or input limits.");
+            if (settings.MaxInputBytes < 1)
+                throw new InvalidOperationException("Config/settings.json contains an invalid input limit.");
 
             return settings;
         }

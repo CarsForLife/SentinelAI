@@ -12,6 +12,13 @@ namespace SentinelAI
     {
         static async Task Main(string[] args)
         {
+            if (!args.Contains("--cli", StringComparer.OrdinalIgnoreCase))
+            {
+                ApplicationConfiguration.Initialize();
+                Application.Run(new MainForm());
+                return;
+            }
+
             Console.Title = "SentinelAI  Cybersecurity Assistant";
 
             Console.WriteLine("==== SentinelAI ====");
@@ -63,7 +70,7 @@ namespace SentinelAI
 
         // --------------------- OPERATIONS ---------------------
 
-        static async Task AnalyzeLog()
+        static Task AnalyzeLog()
         {
             Console.Write("Enter log file path: ");
             var path = Console.ReadLine();
@@ -73,14 +80,15 @@ namespace SentinelAI
 
             Console.WriteLine($"Parsed {events.Count} log events.");
 
-            var llm = new LlmClient();
-            var summary = await llm.AskAsync($"Summarize these logs and identify any threats:\n{string.Join("\n", events)}");
+            var localEngine = new LocalAnalysisService(new LocalKnowledgeBase(ConfigurationLoader.Load().ReportsDirectory));
+            var summary = localEngine.Analyze("Log analysis", string.Join("\n", events.Select(eventItem => eventItem.Raw)));
 
             Console.WriteLine(summary);
             FileHelper.WriteReport(ConfigurationLoader.Load().ReportsDirectory, "log_report.txt", summary);
+            return Task.CompletedTask;
         }
 
-        static async Task AnalyzeScript()
+        static Task AnalyzeScript()
         {
             Console.Write("Enter script path: ");
             var path = Console.ReadLine();
@@ -91,23 +99,25 @@ namespace SentinelAI
             Console.WriteLine("Deterministic findings:");
             indicators.ForEach(indicator => Console.WriteLine($" - {indicator}"));
 
-            var llm = new LlmClient();
-            var result = await llm.AskAsync($"Analyze this script for malicious behavior. Deterministic findings:\n{string.Join("\n", indicators)}\n\nScript:\n{script}");
+            var localEngine = new LocalAnalysisService(new LocalKnowledgeBase(ConfigurationLoader.Load().ReportsDirectory));
+            var result = localEngine.Analyze("Script analysis", $"{string.Join("\n", indicators)}\n{script}");
 
             Console.WriteLine(result);
             FileHelper.WriteReport(ConfigurationLoader.Load().ReportsDirectory, "script_report.txt", result);
+            return Task.CompletedTask;
         }
 
-        static async Task RunYaraScan()
+        static Task RunYaraScan()
         {
             Console.Write("File to scan: ");
             var path = Console.ReadLine();
 
             var yara = new YaraScanner();
-            var results = yara.ScanFile(path);
+            var results = yara.ScanFile(path ?? string.Empty);
 
             Console.WriteLine("YARA Results:");
             results.ForEach(r => Console.WriteLine($" - {r}"));
+            return Task.CompletedTask;
         }
 
         static async Task AnalyzeMemoryDump()

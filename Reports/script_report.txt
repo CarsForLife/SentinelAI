@@ -1,0 +1,8 @@
+﻿Local Script analysis
+Input size: 1 characters
+Risk level: Low
+
+Findings:
+- No known indicators matched. Manual review is still recommended.
+
+Recommendations: preserve the original evidence, validate the source, and review surrounding activity.

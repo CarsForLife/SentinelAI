@@ -1,28 +1,14 @@
 ﻿using System.Threading.Tasks;
+using SentinelAI.Helpers;
 
 namespace SentinelAI.Services
 {
     public class IncidentInvestigator
     {
-        private readonly LlmClient llm = new();
-
         public async Task<string> Investigate(string input)
         {
-            var prompt = $@"
-Investigate this input. Create:
-
-- Timeline
-- Attack intent
-- Indicators of compromise
-- MITRE mapping
-- Severity
-- Recommendations
-
-Input:
-{input}
-";
-
-            return await llm.AskAsync(prompt);
+            var analyzer = new LocalAnalysisService(new LocalKnowledgeBase(ConfigurationLoader.Load().ReportsDirectory));
+            return await Task.FromResult(analyzer.Analyze("Incident investigation", input));
         }
     }
 }

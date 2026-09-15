@@ -1,0 +1,16 @@
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\SentinelAI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\SentinelAI.AssemblyInfoInputs.cache
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\SentinelAI.AssemblyInfo.cs
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\SentinelAI.csproj.CoreCompileInputs.cache
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\SentinelAI.sourcelink.json
+C:\Users\Kar718\Documents\GitHub\SentinelAI\bin\Debug\net8.0\Config\settings.json
+C:\Users\Kar718\Documents\GitHub\SentinelAI\bin\Debug\net8.0\SentinelAI.exe
+C:\Users\Kar718\Documents\GitHub\SentinelAI\bin\Debug\net8.0\SentinelAI.deps.json
+C:\Users\Kar718\Documents\GitHub\SentinelAI\bin\Debug\net8.0\SentinelAI.runtimeconfig.json
+C:\Users\Kar718\Documents\GitHub\SentinelAI\bin\Debug\net8.0\SentinelAI.dll
+C:\Users\Kar718\Documents\GitHub\SentinelAI\bin\Debug\net8.0\SentinelAI.pdb
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\SentinelAI.dll
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\refint\SentinelAI.dll
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\SentinelAI.pdb
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\SentinelAI.genruntimeconfig.cache
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0\ref\SentinelAI.dll

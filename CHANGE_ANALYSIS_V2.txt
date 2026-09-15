@@ -1,0 +1,61 @@
+SentinelAI Change Analysis V2
+============================
+
+Date: 2026-09-15
+
+Summary
+-------
+SentinelAI now runs as a standalone local security analysis tool. The AI endpoint and editor extension dependency were removed. A Windows Forms GUI was added as the default launch mode while the existing terminal workflow remains available with --cli.
+
+Architecture Changes
+--------------------
+
+1. Local analysis engine
+   - LocalAnalysisService performs deterministic indicator matching.
+   - Rules currently cover network download or remote execution, encoded payloads, security-tool tampering, credential access, and persistence.
+   - Findings include severity, matched text, and MITRE ATT&CK technique IDs.
+
+2. Local history
+   - LocalKnowledgeBase stores operation names and matched finding descriptions in Reports/user_history.json.
+   - Reports include frequent findings from previous local runs.
+   - Input contents are not stored in the history file and no data is uploaded.
+
+3. Service migration
+   - Memory, MITRE, malware, incident, log, and script workflows no longer call an LLM.
+   - LlmClient.cs and its third-party HTTP/JSON package dependencies were removed.
+   - Existing service entry points were preserved where practical.
+
+4. Windows GUI
+   - MainForm provides operation selection, file browsing, analysis, output display, and status feedback.
+   - The GUI reuses the existing file validation, local history, and analysis services.
+   - Run `dotnet run` for the GUI or `dotnet run -- --cli` for the terminal menu.
+
+5. Project target
+   - The project targets net8.0-windows and enables Windows Forms.
+   - EnableWindowsTargeting allows the project to restore/build when the SDK is running outside Windows, but the GUI itself requires Windows.
+
+User Workflow
+-------------
+
+1. Install the .NET 8 SDK.
+2. Run `dotnet restore` and `dotnet build`.
+3. Start the GUI with `dotnet run --project SentinelAI.csproj`.
+4. Select an analysis type, browse to an evidence file, and select Analyze.
+5. Review the local report in the output panel.
+6. Review generated reports and history under Reports/.
+
+Known Limitations
+-----------------
+
+- The YARA screen still uses deterministic text signatures and does not execute full YARA syntax.
+- Analysis is heuristic and should be validated by an analyst.
+- The GUI currently accepts file-based input only; a future version could add drag-and-drop, text input, report tabs, and history browsing.
+- There is no automated test project yet.
+
+Recommended V3 Work
+-------------------
+
+1. Extract a shared application coordinator so GUI and CLI workflows use identical operation code.
+2. Add unit tests for every local rule, file-size enforcement, history persistence, and GUI-facing error cases.
+3. Add a real YARA engine only if full rule execution is required.
+4. Add report export, history reset, and a read-only history viewer to the GUI.

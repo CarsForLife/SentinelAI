@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SentinelAI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4380c6ec47e1a8525ca176fcd348a2d48841939")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d83f2be5ab4dbb228701fb5afd1f840a280910d")]
 [assembly: System.Reflection.AssemblyProductAttribute("SentinelAI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SentinelAI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
