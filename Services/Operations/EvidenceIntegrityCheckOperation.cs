@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class EvidenceIntegrityCheckOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Evidence Integrity Check"); }

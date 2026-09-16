@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class IocNormalizationOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("IOC Normalization"); }

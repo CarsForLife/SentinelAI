@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class SecurityTrainingDrillOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Security Training Drill"); }

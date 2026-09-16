@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class AnalystHandoffPackageOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Analyst Handoff Package"); }

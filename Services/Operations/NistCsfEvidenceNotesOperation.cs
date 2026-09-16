@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class NistCsfEvidenceNotesOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("NIST CSF Evidence Notes"); }

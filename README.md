@@ -33,11 +33,13 @@ dotnet run --project SentinelAI.csproj
 
 SentinelAI presents a numbered menu. Select an operation and provide the path to the requested input file. Reports are saved in `Reports/`.
 
-This opens the Windows desktop GUI. Select an operation, browse to an input file, and select **Analyze**. To use the original terminal menu instead:
+This opens the Windows desktop GUI. Select an operation, browse or drop an input file, paste text, and select **Analyze**. The interface fingerprints file evidence with SHA-256, keeps analysis responsive, and provides report copy/export controls. The **History** tab shows prior local findings and the **Errors** tab keeps full errors available to copy. To use the original terminal menu instead:
 
 ```powershell
 dotnet run --project SentinelAI.csproj -- --cli
 ```
+
+The GUI includes a searchable **Capabilities** tab and a WinUtil-style operation checklist containing exactly 62 local security operations across triage, endpoint, forensics, threat intelligence, network, identity, persistence, response, governance, privacy, and training. Tick one or more operations, then choose **Run selected**. All selected operations execute concurrently and their reports are grouped in the Report tab. **Select all** and **Clear selection** are available for batch runs. Every operation has its own handler file under `Services/Operations/`, with operation-specific metadata and an auditable local execution path. A dark/light mode toggle is also included.
 ## Local History
 
 Each analysis records its operation and matched indicators in `Reports/user_history.json`. Future reports include the most frequent prior indicators, so the application builds context from previous use locally. Input contents are not stored there and nothing is uploaded.

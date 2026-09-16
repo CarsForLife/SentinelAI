@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class SecretsExposureScanOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Secrets Exposure Scan"); }

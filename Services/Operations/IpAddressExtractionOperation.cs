@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class IpAddressExtractionOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("IP Address Extraction"); }

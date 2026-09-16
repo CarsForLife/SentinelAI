@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class InputEncodingCheckOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Input Encoding Check"); }

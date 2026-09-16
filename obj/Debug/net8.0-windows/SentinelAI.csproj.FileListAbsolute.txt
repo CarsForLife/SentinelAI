@@ -14,3 +14,7 @@ C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0-windows\refint\Sent
 C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0-windows\SentinelAI.pdb
 C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0-windows\SentinelAI.genruntimeconfig.cache
 C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0-windows\ref\SentinelAI.dll
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0-windows\SentinelAI_MarkupCompile.cache
+C:\Users\Kar718\Documents\GitHub\SentinelAI\obj\Debug\net8.0-windows\SentinelAI.g.resources

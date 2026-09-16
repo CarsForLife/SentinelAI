@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class RegistryPersistenceReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Registry Persistence Review"); }

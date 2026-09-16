@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class WindowsEventTriageOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Windows Event Triage"); }

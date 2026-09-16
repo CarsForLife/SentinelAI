@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class StartupFolderReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Startup Folder Review"); }

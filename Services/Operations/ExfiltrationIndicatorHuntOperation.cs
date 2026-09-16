@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class ExfiltrationIndicatorHuntOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Exfiltration Indicator Hunt"); }

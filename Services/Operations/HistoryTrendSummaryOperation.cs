@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class HistoryTrendSummaryOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("History Trend Summary"); }

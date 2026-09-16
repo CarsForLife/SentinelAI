@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class ArchiveArtifactReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Archive Artifact Review"); }

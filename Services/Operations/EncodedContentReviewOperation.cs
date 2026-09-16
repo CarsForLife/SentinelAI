@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class EncodedContentReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Encoded Content Review"); }

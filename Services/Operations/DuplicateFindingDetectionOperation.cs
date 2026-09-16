@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class DuplicateFindingDetectionOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Duplicate Finding Detection"); }

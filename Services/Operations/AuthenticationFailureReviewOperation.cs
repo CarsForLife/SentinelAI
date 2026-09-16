@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class AuthenticationFailureReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Authentication Failure Review"); }

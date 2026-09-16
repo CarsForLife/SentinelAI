@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class RuleCoverageReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Rule Coverage Review"); }

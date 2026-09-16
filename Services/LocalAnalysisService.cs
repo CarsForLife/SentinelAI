@@ -53,9 +53,12 @@ public sealed class LocalAnalysisService
 
     private string BuildReport(string operation, List<Finding> findings, string input)
     {
+        var operationInfo = SecurityOperationCatalog.Find(operation);
         var lines = new List<string>
         {
             $"Local {operation}",
+            $"Category: {operationInfo.Category}",
+            $"Purpose: {operationInfo.Purpose}",
             $"Input size: {input.Length:N0} characters",
             $"Risk level: {Risk(findings)}",
             "",

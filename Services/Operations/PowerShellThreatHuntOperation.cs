@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class PowerShellThreatHuntOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("PowerShell Threat Hunt"); }

@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class LocalPlaybookLookupOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Local Playbook Lookup"); }

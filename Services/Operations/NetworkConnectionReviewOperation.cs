@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class NetworkConnectionReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Network Connection Review"); }

@@ -1,0 +1,204 @@
+<Window x:Class="SentinelAI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SentinelAI - Local Security Analysis"
+        Width="1200" Height="820" MinWidth="900" MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource WindowBrush}" Foreground="{DynamicResource PrimaryTextBrush}"
+        AllowDrop="True" Drop="Window_Drop">
+    <Window.Resources>
+        <SolidColorBrush x:Key="WindowBrush" Color="#161C24"/>
+        <SolidColorBrush x:Key="PanelBrush" Color="#1D2631"/>
+        <SolidColorBrush x:Key="InputBrush" Color="#26313D"/>
+        <SolidColorBrush x:Key="OutputBrush" Color="#0F141A"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#526579"/>
+        <SolidColorBrush x:Key="PrimaryTextBrush" Color="#F2F5F7"/>
+        <SolidColorBrush x:Key="MutedTextBrush" Color="#B2BECA"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#74DCB8"/>
+        <SolidColorBrush x:Key="ButtonBrush" Color="#33404F"/>
+        <SolidColorBrush x:Key="SuccessBrush" Color="#238F73"/>
+        <SolidColorBrush x:Key="DangerBrush" Color="#FFB4A8"/>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource InputBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource InputBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Focusable="False" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Padding="{TemplateBinding Padding}">
+                                <Grid>
+                                    <ContentPresenter Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <Path Data="M 0 0 L 4 4 L 8 0" Stroke="{DynamicResource MutedTextBrush}" StrokeThickness="1.5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="8,0,4,0"/>
+                                </Grid>
+                            </ToggleButton>
+                            <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+                                <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" Background="{DynamicResource InputBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="2">
+                                    <ScrollViewer MaxHeight="320" VerticalScrollBarVisibility="Auto">
+                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="{DynamicResource InputBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ButtonBrush}"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+                    <Setter Property="Foreground" Value="#10201B"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource ButtonBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="Padding" Value="12,7"/>
+            <Setter Property="Margin" Value="4,0,0,0"/>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="Background" Value="{DynamicResource ButtonBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="4,4,0,0" Margin="2,0,2,0" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter ContentSource="Header" TextElement.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+                                <Setter Property="Foreground" Value="#10201B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource PanelBrush}"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="28">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Border Background="#24352F" CornerRadius="12" Padding="10,5" Margin="0,0,8,0">
+                    <TextBlock Text="LOCAL ONLY" Foreground="#74DCB8" FontWeight="Bold"/>
+                </Border>
+                <Button x:Name="ThemeButton" Content="Light mode" Click="ThemeToggle_Click" Margin="0,0,14,0"/>
+                <TextBlock x:Name="EvidenceStatus" Text="No evidence loaded" Foreground="{DynamicResource MutedTextBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="SENTINELAI" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}"/>
+                <TextBlock Text="Evidence workspace / deterministic threat analysis" Margin="2,4,0,18" Foreground="{DynamicResource MutedTextBrush}"/>
+            </StackPanel>
+        </DockPanel>
+
+        <TabControl Grid.Row="2" Background="{DynamicResource WindowBrush}" BorderBrush="{DynamicResource BorderBrush}">
+            <TabItem Header="Analyze">
+                <Grid Margin="4,16,4,4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Operations" Foreground="{DynamicResource MutedTextBrush}" VerticalAlignment="Top" Margin="0,8,0,0"/>
+                    <ListBox x:Name="OperationBox" Grid.Column="1" Height="150" Margin="0,0,0,10" Background="{DynamicResource InputBrush}" BorderBrush="{DynamicResource BorderBrush}" ToolTip="Tick one or more local security operations">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Display}" IsChecked="{Binding IsSelected, Mode=TwoWay}" Foreground="{DynamicResource PrimaryTextBrush}" Padding="4,5"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <Button Content="Run selected" Click="Analyze_Click" Background="#238F73"/>
+                        <Button Content="Select all" Click="SelectAllOperations_Click"/>
+                        <Button Content="Clear selection" Click="ClearOperationSelection_Click"/>
+                        <Button Content="Clear" Click="ClearInput_Click"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="1" Text="Input file" Foreground="{DynamicResource MutedTextBrush}" VerticalAlignment="Center"/>
+                    <TextBox x:Name="PathBox" Grid.Row="1" Grid.Column="1" AllowDrop="True" Drop="PathBox_Drop" Margin="0,0,0,10"/>
+                    <Button Grid.Row="1" Grid.Column="2" Content="Browse" Click="Browse_Click"/>
+
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Text="Paste evidence, errors, or history here, or drop a file above." Foreground="{DynamicResource MutedTextBrush}" Margin="0,4,0,6"/>
+                    <TextBox x:Name="InputBox" Grid.Row="3" Grid.ColumnSpan="3" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalContentAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Report">
+                <Grid Margin="4,16,4,4">
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Copy report" Click="CopyReport_Click"/>
+                        <Button Content="Export report" Click="ExportReport_Click"/>
+                    </StackPanel>
+                    <TextBox x:Name="ReportBox" Grid.Row="1" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Background="{DynamicResource OutputBrush}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="History">
+                <Grid Margin="4,16,4,4">
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Refresh" Click="RefreshHistory_Click"/>
+                        <Button Content="Reset history" Click="ResetHistory_Click"/>
+                        <Button Content="Copy history" Click="CopyHistory_Click"/>
+                    </StackPanel>
+                    <TextBox x:Name="HistoryBox" Grid.Row="1" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Background="{DynamicResource OutputBrush}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Errors">
+                <Grid Margin="4,16,4,4">
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Clear errors" Click="ClearErrors_Click"/>
+                        <Button Content="Copy errors" Click="CopyErrors_Click"/>
+                    </StackPanel>
+                    <TextBox x:Name="ErrorsBox" Grid.Row="1" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Background="{DynamicResource OutputBrush}" Foreground="{DynamicResource DangerBrush}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Capabilities">
+                <Grid Margin="4,16,4,4">
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                    <TextBox x:Name="FeatureSearchBox" TextChanged="FeatureSearchBox_TextChanged" ToolTip="Search capabilities" Margin="0,0,0,12"/>
+                    <ListBox x:Name="FeatureList" Grid.Row="1" Background="{DynamicResource WindowBrush}" BorderThickness="0"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <TextBlock x:Name="StatusText" Grid.Row="3" Text="Ready. Choose an operation and paste or open an input file." Foreground="{DynamicResource MutedTextBrush}" Margin="0,12,0,0"/>
+    </Grid>
+</Window>

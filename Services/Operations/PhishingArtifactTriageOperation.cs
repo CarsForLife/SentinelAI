@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class PhishingArtifactTriageOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Phishing Artifact Triage"); }

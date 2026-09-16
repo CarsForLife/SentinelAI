@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class RecoveryVerificationChecklistOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Recovery Verification Checklist"); }

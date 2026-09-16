@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class ConfigurationDriftReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Configuration Drift Review"); }

@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class LivingOffTheLandReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Living-off-the-Land Review"); }

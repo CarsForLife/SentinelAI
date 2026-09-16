@@ -1,9 +1,11 @@
 using System.Text.Json;
+using System.IO;
 
 namespace SentinelAI.Services;
 
 public sealed class LocalKnowledgeBase
 {
+    private static readonly object HistoryLock = new();
     private readonly string _path;
     private readonly List<KnowledgeEntry> _entries;
 
@@ -22,8 +24,11 @@ public sealed class LocalKnowledgeBase
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .ToList();
 
-        _entries.Add(new KnowledgeEntry(DateTimeOffset.UtcNow, operation, normalized));
-        File.WriteAllText(_path, JsonSerializer.Serialize(_entries, new JsonSerializerOptions { WriteIndented = true }));
+        lock (HistoryLock)
+        {
+            _entries.Add(new KnowledgeEntry(DateTimeOffset.UtcNow, operation, normalized));
+            File.WriteAllText(_path, JsonSerializer.Serialize(_entries, new JsonSerializerOptions { WriteIndented = true }));
+        }
     }
 
     public IReadOnlyList<string> FrequentFindings(int limit = 5)
@@ -36,6 +41,29 @@ public sealed class LocalKnowledgeBase
             .Take(limit)
             .Select(group => $"{group.Key} ({group.Count()} previous occurrence{(group.Count() == 1 ? "" : "s")})")
             .ToList();
+    }
+
+    public string ReadHistory()
+    {
+        if (_entries.Count == 0)
+            return "No local history yet.";
+
+        return string.Join(
+            Environment.NewLine + Environment.NewLine,
+            _entries.Select(entry =>
+            {
+                var findings = entry.Findings.Count == 0
+                    ? "No matched findings"
+                    : string.Join(Environment.NewLine, entry.Findings.Select(finding => $"- {finding}"));
+                return $"{entry.Timestamp.LocalDateTime:G} | {entry.Operation}{Environment.NewLine}{findings}";
+            }));
+    }
+
+    public void Reset()
+    {
+        _entries.Clear();
+        if (File.Exists(_path))
+            File.Delete(_path);
     }
 
     private List<KnowledgeEntry> Load()

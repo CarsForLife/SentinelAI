@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class BaselineComparisonOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Baseline Comparison"); }

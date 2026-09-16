@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class DllHijackIndicatorScanOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("DLL Hijack Indicator Scan"); }

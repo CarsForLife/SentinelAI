@@ -8,5 +8,70 @@
     "Timestamp": "2026-09-15T14:01:15.7349812+00:00",
     "Operation": "Script analysis",
     "Findings": []
+  },
+  {
+    "Timestamp": "2026-09-16T10:53:40.1129053+00:00",
+    "Operation": "Memory Strings",
+    "Findings": [
+      "Network download or remote execution",
+      "Credential access indicator",
+      "Persistence indicator"
+    ]
+  },
+  {
+    "Timestamp": "2026-09-16T10:53:53.5412256+00:00",
+    "Operation": "Script Analysis",
+    "Findings": [
+      "Network download or remote execution",
+      "Credential access indicator",
+      "Persistence indicator"
+    ]
+  },
+  {
+    "Timestamp": "2026-09-16T10:58:31.705698+00:00",
+    "Operation": "MITRE Mapping",
+    "Findings": [
+      "Network download or remote execution",
+      "Credential access indicator",
+      "Persistence indicator"
+    ]
+  },
+  {
+    "Timestamp": "2026-09-16T10:58:41.0350222+00:00",
+    "Operation": "Malware Classification",
+    "Findings": [
+      "Network download or remote execution",
+      "Credential access indicator",
+      "Persistence indicator"
+    ]
+  },
+  {
+    "Timestamp": "2026-09-16T11:14:41.3810977+00:00",
+    "Operation": "Script analysis",
+    "Findings": []
+  },
+  {
+    "Timestamp": "2026-09-16T11:16:27.5582391+00:00",
+    "Operation": "Malware classification",
+    "Findings": []
+  },
+  {
+    "Timestamp": "2026-09-16T11:20:08.053133+00:00",
+    "Operation": "Script analysis",
+    "Findings": []
+  },
+  {
+    "Timestamp": "2026-09-16T11:21:54.5914899+00:00",
+    "Operation": "Malware classification",
+    "Findings": []
+  },
+  {
+    "Timestamp": "2026-09-16T11:53:03.7774076+00:00",
+    "Operation": "Defensive Recommendation Review",
+    "Findings": [
+      "Network download or remote execution",
+      "Credential access indicator",
+      "Persistence indicator"
+    ]
   }
 ]

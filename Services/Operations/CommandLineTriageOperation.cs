@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class CommandLineTriageOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Command Line Triage"); }

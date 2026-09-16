@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class SeverityPrioritizationOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Severity Prioritization"); }

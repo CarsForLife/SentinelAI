@@ -6,3 +6,8 @@ Findings:
 - No known indicators matched. Manual review is still recommended.
 
 Recommendations: preserve the original evidence, validate the source, and review surrounding activity.
+
+Prior local history:
+- Credential access indicator (4 previous occurrences)
+- Network download or remote execution (4 previous occurrences)
+- Persistence indicator (4 previous occurrences)

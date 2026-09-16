@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class DomainExtractionOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Domain Extraction"); }

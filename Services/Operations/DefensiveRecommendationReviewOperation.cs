@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class DefensiveRecommendationReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Defensive Recommendation Review"); }

@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class ScheduledTaskReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Scheduled Task Review"); }

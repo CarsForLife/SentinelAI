@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class ReportQualityCheckOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Report Quality Check"); }

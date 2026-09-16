@@ -1,0 +1,2 @@
+namespace SentinelAI.Services;
+public sealed class AttackCoverageSummaryOperation : Operations.ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("ATT&CK Coverage Summary"); }

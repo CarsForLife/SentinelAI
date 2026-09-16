@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class CaseTimelineBuilderOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Case Timeline Builder"); }

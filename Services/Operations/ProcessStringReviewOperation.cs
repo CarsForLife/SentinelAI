@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class ProcessStringReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Process String Review"); }

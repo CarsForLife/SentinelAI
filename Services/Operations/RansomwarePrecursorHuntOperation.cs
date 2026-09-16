@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class RansomwarePrecursorHuntOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Ransomware Precursor Hunt"); }

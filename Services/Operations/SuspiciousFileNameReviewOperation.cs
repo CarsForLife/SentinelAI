@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class SuspiciousFileNameReviewOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Suspicious File Name Review"); }

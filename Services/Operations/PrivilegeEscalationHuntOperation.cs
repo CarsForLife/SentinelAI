@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class PrivilegeEscalationHuntOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Privilege Escalation Hunt"); }

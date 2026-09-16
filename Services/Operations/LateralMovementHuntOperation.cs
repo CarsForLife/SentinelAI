@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class LateralMovementHuntOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Lateral Movement Hunt"); }

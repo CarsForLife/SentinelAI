@@ -1,0 +1,2 @@
+namespace SentinelAI.Services.Operations;
+public sealed class WebShellIndicatorScanOperation : ISecurityOperation { public SecurityOperation Metadata => SecurityOperationCatalog.Find("Web Shell Indicator Scan"); }

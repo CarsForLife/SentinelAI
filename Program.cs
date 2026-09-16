@@ -10,14 +10,21 @@ namespace SentinelAI
 {
     public class Program
     {
-        static async Task Main(string[] args)
+        [STAThread]
+        static void Main(string[] args)
         {
             if (!args.Contains("--cli", StringComparer.OrdinalIgnoreCase))
             {
-                ApplicationConfiguration.Initialize();
-                Application.Run(new MainForm());
+                var application = new System.Windows.Application();
+                application.Run(new MainWindow());
                 return;
             }
+
+            RunCliAsync().GetAwaiter().GetResult();
+        }
+
+        private static async Task RunCliAsync()
+        {
 
             Console.Title = "SentinelAI  Cybersecurity Assistant";
 

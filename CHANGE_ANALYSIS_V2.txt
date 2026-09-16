@@ -5,7 +5,7 @@ Date: 2026-09-15
 
 Summary
 -------
-SentinelAI now runs as a standalone local security analysis tool. The AI endpoint and editor extension dependency were removed. A Windows Forms GUI was added as the default launch mode while the existing terminal workflow remains available with --cli.
+SentinelAI now runs as a standalone local security analysis tool. The AI endpoint and editor extension dependency were removed. A WPF GUI was added as the default launch mode while the existing terminal workflow remains available with --cli.
 
 Architecture Changes
 --------------------
@@ -14,6 +14,11 @@ Architecture Changes
    - LocalAnalysisService performs deterministic indicator matching.
    - Rules currently cover network download or remote execution, encoded payloads, security-tool tampering, credential access, and persistence.
    - Findings include severity, matched text, and MITRE ATT&CK technique IDs.
+   - SecurityOperationCatalog exposes 62 named defensive operations with categories and analyst purposes.
+   - Each operation has a dedicated handler file under Services/Operations/.
+   - The WPF checklist supports selecting multiple operations, Select all, Clear selection, and concurrent batch execution.
+   - Concurrent history writes are serialized to keep user_history.json valid.
+   - Operations remain local and deterministic; unsupported network lookups or autonomous actions are not implied by an operation name.
 
 2. Local history
    - LocalKnowledgeBase stores operation names and matched finding descriptions in Reports/user_history.json.
@@ -25,13 +30,22 @@ Architecture Changes
    - LlmClient.cs and its third-party HTTP/JSON package dependencies were removed.
    - Existing service entry points were preserved where practical.
 
-4. Windows GUI
-   - MainForm provides operation selection, file browsing, analysis, output display, and status feedback.
+4. WPF GUI
+   - MainWindow provides operation selection, file browsing, analysis, output display, and status feedback.
    - The GUI reuses the existing file validation, local history, and analysis services.
+   - Users can paste logs, scripts, errors, or history directly into the multiline input area.
+   - Files can be selected with Browse or dropped onto the input path.
+   - History has refresh, reset, and copy actions.
+   - Errors are retained in a copyable Errors tab instead of being reduced to a short message.
+   - Evidence can be pasted directly into the workspace or loaded by file picker and drag-and-drop.
+   - Analysis runs off the UI thread so larger inputs keep the interface responsive.
+   - Reports can be copied to the clipboard or exported to a text file.
+   - File evidence receives a SHA-256 fingerprint in the report and status bar.
+   - A clear action resets the current evidence without touching the saved history.
    - Run `dotnet run` for the GUI or `dotnet run -- --cli` for the terminal menu.
 
 5. Project target
-   - The project targets net8.0-windows and enables Windows Forms.
+   - The project targets net8.0-windows and enables WPF.
    - EnableWindowsTargeting allows the project to restore/build when the SDK is running outside Windows, but the GUI itself requires Windows.
 
 User Workflow
@@ -40,17 +54,32 @@ User Workflow
 1. Install the .NET 8 SDK.
 2. Run `dotnet restore` and `dotnet build`.
 3. Start the GUI with `dotnet run --project SentinelAI.csproj`.
-4. Select an analysis type, browse to an evidence file, and select Analyze.
-5. Review the local report in the output panel.
-6. Review generated reports and history under Reports/.
+4. Select an analysis type, browse to an evidence file, drop a file, or paste text.
+5. Select Analyze and review the result in the Report tab.
+6. Use History to review, copy, or reset prior local findings.
+7. Use Errors to copy full errors for troubleshooting.
+8. Review generated reports and history under Reports/.
 
 Known Limitations
 -----------------
 
 - The YARA screen still uses deterministic text signatures and does not execute full YARA syntax.
 - Analysis is heuristic and should be validated by an analyst.
-- The GUI currently accepts file-based input only; a future version could add drag-and-drop, text input, report tabs, and history browsing.
+- The GUI export currently writes plain-text reports; structured JSON/PDF export is future work.
+- The GUI editor may show false-positive unresolved-name diagnostics for generated WPF fields; `dotnet build` is the authoritative validation and currently succeeds.
 - There is no automated test project yet.
+
+Reference-Informed Design
+-------------------------
+
+The product direction was informed by the public descriptions of four security projects:
+
+- Anthropic Cybersecurity Skills: structured, searchable playbooks and framework mappings.
+- CAI: explicit orchestration and safety boundaries; CAI is archived and requires model providers, so SentinelAI does not depend on it.
+- Strix: evidence-oriented runs, findings, reports, and repeatable workflow presentation; SentinelAI does not perform autonomous exploitation.
+- h4cker: broad, curated security-domain navigation and learning references.
+
+SentinelAI implements the defensible subset that fits a local C# application today: deterministic analysis, evidence fingerprints, analyst-verifiable reports, persistent local history, searchable capabilities, and explicit privacy boundaries. It does not claim feature parity with repositories that contain hundreds of playbooks, AI agents, cloud services, exploit runtimes, or training material.
 
 Recommended V3 Work
 -------------------
@@ -58,4 +87,4 @@ Recommended V3 Work
 1. Extract a shared application coordinator so GUI and CLI workflows use identical operation code.
 2. Add unit tests for every local rule, file-size enforcement, history persistence, and GUI-facing error cases.
 3. Add a real YARA engine only if full rule execution is required.
-4. Add report export, history reset, and a read-only history viewer to the GUI.
+4. Add a dedicated report export button and report list to the GUI.
